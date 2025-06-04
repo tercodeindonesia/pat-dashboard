@@ -12,7 +12,6 @@
 - React v18
 - React-dom v18
 - Typescript v5.4.9
-- Ant Design v5.16.2
 
 ## Quick Start
 
