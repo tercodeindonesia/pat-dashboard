@@ -1,18 +1,18 @@
 import { LoaderFunctionArgs, redirect } from "react-router";
 
-import { ROUTES } from "./commons/constants/routes";
 import { filterPermission } from "./utils/permission";
 import { SessionUser } from "./libs/localstorage";
 import { PERMISSIONS } from "./commons/constants/permissions";
+import { paths } from "./commons/constants/paths";
 
 const mappingRoutePermissions = [
   {
-    path: ROUTES.dashboard,
+    path: paths.dashboard,
     permissions: [PERMISSIONS.DASHBOARD.READ_DASHBOARD],
   },
 ];
 
-const mappingPublicRoutes = ["/auth/login", "/auth/oauth-callback"];
+const mappingPublicRoutes = ["/auth/login", "/auth/oauth-callback", "/dashboard"];
 
 export const middleware = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
@@ -35,11 +35,11 @@ export const middleware = async ({ request }: LoaderFunctionArgs) => {
   }
 
   if (!session) {
-    return redirect(ROUTES.auth.login);
+    return redirect(paths.auth.login);
   }
 
   if (allowedPermissions.length === 0) {
-    return redirect(ROUTES.dashboard);
+    return redirect(paths.dashboard);
   }
 
   return null;
