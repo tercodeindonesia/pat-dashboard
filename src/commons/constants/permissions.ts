@@ -1,6 +1,6 @@
 export const PERMISSIONS = {
   DASHBOARD: {
-    READ_DASHBOARD: "READ DASHBOARD",
-    READ_DASHBOARD_ANALYTIC: "READ DASHBOARD ANALYTIC",
+    READ_DASHBOARD: "read-dashboard",
   },
+  DEFAULT: "default",
 };
