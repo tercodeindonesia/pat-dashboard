@@ -1,16 +1,34 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 import {
+  AppBar,
+  Avatar,
+  Badge,
   Box,
   Collapse,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
+  Paper,
+  Toolbar,
+  Tooltip,
+  Typography,
+  useTheme,
 } from "@mui/material";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import {
+  ExpandLess,
+  ExpandMore,
+  Logout,
+  NotificationsOutlined,
+  Person,
+  Settings,
+} from "@mui/icons-material";
 
 import { SIDEBAR_ITEMS, TSidebarItem } from "@/commons/constants/sidebar";
 
@@ -71,7 +89,39 @@ const SidebarItem = ({ isChild, item }: Props) => {
   );
 };
 
+const settings = [
+  {
+    key: "profile",
+    label: "Profile",
+    icon: <Person />,
+    danger: false,
+  },
+  {
+    key: "settings",
+    label: "Settings",
+    icon: <Settings />,
+    danger: false,
+  },
+  {
+    key: "logout",
+    label: "Logout",
+    icon: <Logout />,
+    danger: true,
+  },
+];
+
 const ProtectedLayout = () => {
+  const theme = useTheme();
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <Drawer variant="permanent" anchor="left">
@@ -84,8 +134,71 @@ const ProtectedLayout = () => {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, ml: "260px" }}>
-        <Outlet />
+      <Box component="main" sx={{ flexGrow: 1, p: 0, ml: "260px" }}>
+        <AppBar
+          position="static"
+          elevation={0}
+          sx={{
+            backgroundColor: theme.palette.background.paper,
+            borderBottom: `1px solid ${theme.palette.divider}`,
+            color: theme.palette.text.primary,
+          }}
+        >
+          <Toolbar>
+            <Typography variant="h6">Dashboard</Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: "24px", pr: 4 }}>
+              <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+                <Badge badgeContent={1} color="error">
+                  <NotificationsOutlined fontSize="medium" />
+                </Badge>
+              </IconButton>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar
+                    alt="Admin 1"
+                    src=""
+                    sx={{
+                      height: "32px",
+                      width: "32px",
+                    }}
+                  >
+                    A
+                  </Avatar>
+                  <ExpandMore />
+                </IconButton>
+              </Tooltip>
+            </Box>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting.key} onClick={handleCloseUserMenu}>
+                  <ListItemIcon>{setting.icon}</ListItemIcon>
+                  <Typography>{setting.label}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Toolbar>
+        </AppBar>
+        <Box sx={{ p: "16px" }}>
+          <Paper sx={{ p: "16px" }} elevation={0}>
+            <Outlet />
+          </Paper>
+        </Box>
       </Box>
     </Box>
   );

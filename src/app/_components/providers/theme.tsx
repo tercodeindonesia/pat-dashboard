@@ -9,8 +9,13 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
       fontSize: 14,
     },
     palette: {
+      mode: "light",
+      primary: {
+        main: "#3F51B5",
+      },
       background: {
         default: "#F7F8FA",
+        paper: "#FFFFFF",
       },
       text: {
         primary: "#737373",
