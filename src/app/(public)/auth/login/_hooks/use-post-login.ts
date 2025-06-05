@@ -3,7 +3,6 @@ import { TLoginParam, TLoginResponse } from "@/api/auth/type";
 import { SessionUser } from "@/libs/localstorage";
 import { SessionToken } from "@/libs/cookies";
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import { notification } from "antd";
 import { useNavigate } from "react-router";
 
 export const usePostLogin = (): UseMutationResult<
@@ -21,11 +20,6 @@ export const usePostLogin = (): UseMutationResult<
       SessionToken.set(res.data);
       navigate(0);
     },
-    onError: (error) => {
-      notification.error({
-        message: "Login Failed",
-        description: (error as Error).message,
-      });
-    },
+    onError: () => {},
   });
 };
