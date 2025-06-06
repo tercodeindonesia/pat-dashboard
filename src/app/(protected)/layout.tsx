@@ -118,8 +118,19 @@ const settings = [
 ];
 
 const ProtectedLayout = () => {
+  const location = useLocation();
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const flattenMenus = (items: TSidebarItem[]): TSidebarItem[] => {
+    return items.flatMap(({ children, ...item }) => [
+      item,
+      ...(children ? flattenMenus(children) : []),
+    ]);
+  };
+
+  const flattenedMenus = flattenMenus(SIDEBAR_ITEMS);
+  const activeMenu = flattenedMenus.find((menu) => menu.path === location.pathname);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -152,7 +163,7 @@ const ProtectedLayout = () => {
           }}
         >
           <Toolbar>
-            <Typography variant="h6">Dashboard</Typography>
+            <Typography variant="h6">{activeMenu?.label}</Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" }, gap: "24px", pr: 4 }}>
               <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
