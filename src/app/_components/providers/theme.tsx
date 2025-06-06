@@ -11,7 +11,7 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
     palette: {
       mode: "light",
       primary: {
-        main: "#3F51B5",
+        main: "#304A36",
       },
       background: {
         default: "#F7F8FA",

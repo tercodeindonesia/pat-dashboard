@@ -66,6 +66,14 @@ const SidebarItem = ({ isChild, item }: Props) => {
           to={item.path || ""}
           sx={{
             pl: isChild ? 7 : 2,
+            "&.Mui-selected": {
+              color: "primary.main",
+              backgroundColor: hasChildren ? "transparent" : undefined,
+              borderRadius: "8px",
+            },
+            "& .MuiListItemIcon-root": {
+              color: isActive ? "primary.main" : "inherit",
+            },
           }}
           selected={isActive}
         >
