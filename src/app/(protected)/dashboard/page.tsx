@@ -1,6 +1,7 @@
 import { FC, ReactElement } from "react";
 
 import { useSession } from "@/app/_components/providers/session";
+import { Page } from "@/app/_components/ui";
 
 const Component: FC = (): ReactElement => {
   const { signout } = useSession();
@@ -10,9 +11,9 @@ const Component: FC = (): ReactElement => {
   };
 
   return (
-    <div>
+    <Page>
       <button onClick={handleLogout}>Logout</button>
-    </div>
+    </Page>
   );
 };
 

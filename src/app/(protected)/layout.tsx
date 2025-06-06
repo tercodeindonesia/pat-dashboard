@@ -15,7 +15,6 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  Paper,
   Toolbar,
   Tooltip,
   Typography,
@@ -67,6 +66,14 @@ const SidebarItem = ({ isChild, item }: Props) => {
           to={item.path || ""}
           sx={{
             pl: isChild ? 7 : 2,
+            "&.Mui-selected": {
+              color: "primary.main",
+              backgroundColor: hasChildren ? "transparent" : undefined,
+              borderRadius: "8px",
+            },
+            "& .MuiListItemIcon-root": {
+              color: isActive ? "primary.main" : "inherit",
+            },
           }}
           selected={isActive}
         >
@@ -111,8 +118,19 @@ const settings = [
 ];
 
 const ProtectedLayout = () => {
+  const location = useLocation();
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const flattenMenus = (items: TSidebarItem[]): TSidebarItem[] => {
+    return items.flatMap(({ children, ...item }) => [
+      item,
+      ...(children ? flattenMenus(children) : []),
+    ]);
+  };
+
+  const flattenedMenus = flattenMenus(SIDEBAR_ITEMS);
+  const activeMenu = flattenedMenus.find((menu) => menu.path === location.pathname);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -145,7 +163,7 @@ const ProtectedLayout = () => {
           }}
         >
           <Toolbar>
-            <Typography variant="h6">Dashboard</Typography>
+            <Typography variant="h6">{activeMenu?.label}</Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" }, gap: "24px", pr: 4 }}>
               <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
@@ -195,9 +213,7 @@ const ProtectedLayout = () => {
           </Toolbar>
         </AppBar>
         <Box sx={{ p: "16px" }}>
-          <Paper sx={{ p: "16px" }} elevation={0}>
-            <Outlet />
-          </Paper>
+          <Outlet />
         </Box>
       </Box>
     </Box>
