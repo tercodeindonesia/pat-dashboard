@@ -15,7 +15,6 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  Paper,
   Toolbar,
   Tooltip,
   Typography,
@@ -195,9 +194,7 @@ const ProtectedLayout = () => {
           </Toolbar>
         </AppBar>
         <Box sx={{ p: "16px" }}>
-          <Paper sx={{ p: "16px" }} elevation={0}>
-            <Outlet />
-          </Paper>
+          <Outlet />
         </Box>
       </Box>
     </Box>
