@@ -21,7 +21,18 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
         primary: "#737373",
       },
     },
-    components: {},
+    components: {
+      MuiDataGrid: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "#FFFFFF",
+          },
+          columnHeader: {
+            backgroundColor: "#FFFFFF",
+          },
+        },
+      },
+    },
   });
 
   return (
