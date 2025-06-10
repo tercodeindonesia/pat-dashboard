@@ -1,14 +1,11 @@
-import { TResponsePaginate } from "@/commons/types/response";
+import { DataTableProps } from "@/app/_components/ui/data-table";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const makeSource = <T extends Record<string, any>>(source?: TResponsePaginate<T>) => {
-  if (!source) return;
+export const createPaginationInfo = (
+  params?: Record<string, number>,
+): DataTableProps["paginationInfo"] => {
   return {
-    data: source.data.items,
-    meta: {
-      page: source.data.meta.page,
-      pageSize: source.data.meta.per_page,
-      total: source.data.meta.total,
-    },
+    total: params?.total,
+    page_size: 10,
+    page: params?.page ? params.page - 1 : 0,
   };
 };

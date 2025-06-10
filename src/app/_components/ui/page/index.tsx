@@ -1,13 +1,24 @@
-import { Paper } from "@mui/material";
+import { Box, Divider, Paper } from "@mui/material";
 
 interface Props {
   children?: React.ReactNode;
+  topPage?: React.ReactNode;
 }
 
-const Page = ({ children }: Props) => {
+const Page = ({ children, topPage }: Props) => {
   return (
-    <Paper sx={{ p: "16px" }} elevation={0}>
-      {children}
+    <Paper elevation={0}>
+      {topPage ? (
+        <Box
+          sx={{
+            p: "16px",
+          }}
+        >
+          {topPage}
+        </Box>
+      ) : null}
+      <Divider />
+      <Box sx={{ p: "16px" }}>{children}</Box>
     </Paper>
   );
 };
