@@ -11,7 +11,7 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
     palette: {
       mode: "light",
       primary: {
-        main: "#304A36",
+        main: "#516F58",
       },
       background: {
         default: "#F7F8FA",
@@ -22,6 +22,22 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
       },
     },
     components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: "unset",
+            borderRadius: "10px",
+            padding: "16px 14px",
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            borderRadius: "10px",
+          },
+        },
+      },
       MuiDataGrid: {
         styleOverrides: {
           root: {
@@ -29,6 +45,13 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
           },
           columnHeader: {
             backgroundColor: "#FFFFFF",
+          },
+        },
+      },
+      MuiPickersOutlinedInput: {
+        styleOverrides: {
+          root: {
+            borderRadius: "10px",
           },
         },
       },

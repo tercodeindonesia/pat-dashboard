@@ -13,7 +13,7 @@ type Props<T extends FieldValues> = UseControllerProps<T> &
     format?: string;
   };
 
-const FormInputDateField = <T extends FieldValues>({
+const FormDateField = <T extends FieldValues>({
   control,
   name,
   label = "",
@@ -69,4 +69,4 @@ const FormInputDateField = <T extends FieldValues>({
   );
 };
 
-export default FormInputDateField;
+export default FormDateField;

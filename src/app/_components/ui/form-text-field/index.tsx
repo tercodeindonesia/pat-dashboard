@@ -22,7 +22,7 @@ type Props<T extends FieldValues> = UseControllerProps<T> &
     toogle?: boolean;
   };
 
-const FormInputTextField = <T extends FieldValues>({
+const FormTextField = <T extends FieldValues>({
   control,
   name,
   label = "",
@@ -101,4 +101,4 @@ const FormInputTextField = <T extends FieldValues>({
   );
 };
 
-export default FormInputTextField;
+export default FormTextField;

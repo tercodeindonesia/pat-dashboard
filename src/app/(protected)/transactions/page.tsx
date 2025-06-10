@@ -5,6 +5,7 @@ import { Page } from "@/app/_components/ui";
 import DataTable from "@/app/_components/ui/data-table";
 
 import { createPaginationInfo } from "@/utils/data-table";
+import Filter from "@/app/_components/ui/filter";
 
 const rows: GridRowsProp = [
   { id: 1, name: "Data Grid", description: "the Community version" },
@@ -19,7 +20,7 @@ const columns: GridColDef[] = [
 
 const Component: FC = (): ReactElement => {
   return (
-    <Page noStyle>
+    <Page topPage={<Filter />}>
       <DataTable
         getRowId={(row) => row.id}
         loading={false}
