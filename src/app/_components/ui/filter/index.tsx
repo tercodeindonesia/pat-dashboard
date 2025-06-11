@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { FileDownloadOutlined, SearchOutlined } from "@mui/icons-material";
+import { Add, FileDownloadOutlined, SearchOutlined } from "@mui/icons-material";
 import { Box, Button, Collapse, Grid, Stack, TextField, Typography } from "@mui/material";
 
 import { useDebounce } from "@/app/_hooks/use-debounce";
@@ -154,7 +154,7 @@ const Filter = ({
         </Grid>
         {withAddButton ? (
           <Grid size={{ xs: 12, md: 2 }} sx={{ textAlign: "right" }}>
-            <Button variant="contained" onClick={onAdd}>
+            <Button variant="contained" onClick={onAdd} startIcon={<Add />}>
               {labelAdd}
             </Button>
           </Grid>
