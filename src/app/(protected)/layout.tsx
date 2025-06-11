@@ -141,7 +141,7 @@ const ProtectedLayout = () => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box>
       <Drawer variant="permanent" anchor="left">
         <Box sx={{ textAlign: "center", p: 2 }}>
           <img src="/images/logo.png" alt="Logo" />

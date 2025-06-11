@@ -15,7 +15,7 @@ const rows: GridRowsProp = [
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Product Name", width: 200 },
-  { field: "description", headerName: "Description", flex: 1 },
+  { field: "description", headerName: "Description", width: 400 },
 ];
 
 const Component: FC = (): ReactElement => {

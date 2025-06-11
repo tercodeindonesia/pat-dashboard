@@ -45,6 +45,8 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
           },
           columnHeader: {
             backgroundColor: "#FFFFFF",
+            fontWeight: "bold",
+            color: "#2B2B2B",
           },
         },
       },
