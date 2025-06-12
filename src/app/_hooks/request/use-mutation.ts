@@ -1,4 +1,4 @@
-import { TResponseError } from "@/commons/types/response";
+import { TErrorResponse } from "@/commons/types/response";
 import {
   QueryClient,
   UseMutationOptions,
@@ -7,11 +7,10 @@ import {
 
 export const useMutation = <
   TData = unknown,
-  TError = TResponseError,
+  TError = TErrorResponse,
   TVariables = void,
   TContext = unknown,
 >(
   options: UseMutationOptions<TData, TError, TVariables, TContext>,
-  queryClient?: QueryClient
-) =>
-  useMutationOrigin<TData, TError, TVariables, TContext>(options, queryClient);
+  queryClient?: QueryClient,
+) => useMutationOrigin<TData, TError, TVariables, TContext>(options, queryClient);

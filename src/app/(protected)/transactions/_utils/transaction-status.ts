@@ -1,5 +1,5 @@
 import { TTransactionStatus } from "@/api/transactions/type";
-import { ChipProps } from "@/app/_components/ui/Chip";
+import { ChipProps } from "@/app/_components/ui/chip";
 import { Nullable } from "@/commons/types/common";
 
 const getTransactionStatus = (status: Nullable<TTransactionStatus>): ChipProps => {
