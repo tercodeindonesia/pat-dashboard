@@ -28,7 +28,7 @@ const FormDateField = <T extends FieldValues>({
       control={control}
       name={name}
       render={({ field, fieldState }) => (
-        <FormControl variant="standard" sx={{ width: "100%" }}>
+        <FormControl sx={{ width: "100%" }}>
           {label ? (
             <InputLabel htmlFor={field.name} error={fieldState.invalid} required={required}>
               {label}
@@ -57,9 +57,6 @@ const FormDateField = <T extends FieldValues>({
                   error: fieldState.invalid,
                   helperText: fieldState.error?.message,
                 },
-              }}
-              sx={{
-                backgroundColor: "white",
               }}
             />
           </FormGroup>

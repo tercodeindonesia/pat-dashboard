@@ -1,4 +1,4 @@
-import { TResponseData, TResponsePaginate } from "@/commons/types/response";
+import { TResponse, TResponsePaginate } from "@/commons/types/response";
 import { TRoleItem } from "../role/type";
 
 export type TUserItem = {
@@ -25,5 +25,4 @@ export type TGetUsersParams = {
 };
 
 export type TUserPaginateResponse = TResponsePaginate<TUserItem>;
-
-export type TUserDetailResponse = TResponseData<TUserItem>;
+export type TUserDetailResponse = TResponse<TUserItem>;

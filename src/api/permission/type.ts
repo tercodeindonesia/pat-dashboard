@@ -1,4 +1,4 @@
-import { TResponseData, TResponsePaginate } from "@/commons/types/response";
+import { TResponse, TResponsePaginate } from "@/commons/types/response";
 
 export type TPermissionItem = {
   id: string;
@@ -29,4 +29,4 @@ export type TGetPermissionsParams = {
 
 export type TPermissionListResponse = TResponsePaginate<TPermissionItem>;
 
-export type TPermissionDetailResponse = TResponseData<TPermissionItem>;
+export type TPermissionDetailResponse = TResponse<TPermissionItem>;

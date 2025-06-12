@@ -1,4 +1,4 @@
-import { TResponseError } from "@/commons/types/response";
+import { TErrorResponse } from "@/commons/types/response";
 import {
   QueryClient,
   QueryKey,
@@ -8,15 +8,12 @@ import {
 
 export const useQuery = <
   TQueryFnData = unknown,
-  TError = TResponseError,
+  TError = TErrorResponse,
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
 >(
   options: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
-  queryClient?: QueryClient
+  queryClient?: QueryClient,
 ) => {
-  return useQueryOriginal<TQueryFnData, TError, TData, TQueryKey>(
-    options,
-    queryClient
-  );
+  return useQueryOriginal<TQueryFnData, TError, TData, TQueryKey>(options, queryClient);
 };
