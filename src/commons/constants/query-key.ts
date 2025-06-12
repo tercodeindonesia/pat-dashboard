@@ -1,1 +1,5 @@
-export const QUERY_KEY = {} as const;
+export const queryKeys = {
+  transactions: {
+    list: "transactions/list",
+  },
+} as const;
