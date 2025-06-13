@@ -42,6 +42,9 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
         styleOverrides: {
           root: {
             backgroundColor: "#FFFFFF",
+            borderBottom: "none",
+            borderLeft: "none",
+            borderRight: "none",
           },
           columnHeader: {
             backgroundColor: "#FFFFFF",
