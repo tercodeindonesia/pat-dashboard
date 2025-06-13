@@ -1,41 +1,7 @@
-import { alpha, Box, TablePaginationProps } from "@mui/material";
+import { alpha, Box, MenuItem, Select, Stack, Typography } from "@mui/material";
 import MuiPagination from "@mui/material/Pagination";
-import {
-  DataGrid,
-  DataGridProps,
-  gridPageCountSelector,
-  GridPagination,
-  PaginationPropsOverrides,
-  useGridApiContext,
-  useGridSelector,
-} from "@mui/x-data-grid";
+import { DataGrid, DataGridProps } from "@mui/x-data-grid";
 import { TFilterParams } from "@/commons/types/filter";
-
-function Pagination({
-  page,
-  onPageChange,
-  className,
-}: Pick<TablePaginationProps, "page" | "onPageChange" | "className">) {
-  const apiRef = useGridApiContext();
-  const pageCount = useGridSelector(apiRef, gridPageCountSelector);
-
-  return (
-    <MuiPagination
-      color="primary"
-      className={className}
-      count={pageCount}
-      page={page + 1}
-      shape="rounded"
-      onChange={(event, newPage) => {
-        onPageChange(event as React.MouseEvent<HTMLButtonElement>, newPage - 1);
-      }}
-    />
-  );
-}
-
-function CustomPagination(props: PaginationPropsOverrides) {
-  return <GridPagination ActionsComponent={Pagination} {...props} />;
-}
 
 export interface DataTableProps
   extends Omit<
@@ -47,6 +13,7 @@ export interface DataTableProps
     total?: number;
     page_size: number;
     page: number;
+    limit?: number;
   };
 }
 
@@ -55,17 +22,9 @@ const DataTable = ({ handleChange, paginationInfo, ...others }: DataTableProps) 
     <Box sx={{ width: "100%" }}>
       <DataGrid
         {...others}
-        paginationMode="server"
-        paginationModel={{
-          pageSize: paginationInfo.page_size,
-          page: paginationInfo.page,
-        }}
-        rowCount={paginationInfo.total}
-        pageSizeOptions={[10]}
+        hideFooterPagination
+        hideFooter
         disableRowSelectionOnClick
-        slots={{
-          pagination: CustomPagination,
-        }}
         sx={{
           "& .MuiDataGrid-row:nth-of-type(even)": {
             backgroundColor: "#f9f9f9",
@@ -80,14 +39,44 @@ const DataTable = ({ handleChange, paginationInfo, ...others }: DataTableProps) 
             backgroundColor: "#ffffff",
           },
         }}
-        onPaginationModelChange={(params) => {
-          const page = params.page ? params.page + 1 : 1;
-          handleChange({
-            page,
-            per_page: params.pageSize,
-          });
-        }}
       />
+      <Stack
+        direction="row"
+        sx={{
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginTop: "24px",
+        }}
+      >
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            alignItems: "center",
+          }}
+        >
+          <Typography>Rows Per Page :</Typography>
+          <Select
+            value={paginationInfo.limit}
+            onChange={(e) => handleChange({ per_page: e.target.value })}
+            autoWidth
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={50}>50</MenuItem>
+            <MenuItem value={100}>100</MenuItem>
+          </Select>
+        </Stack>
+        <MuiPagination
+          count={paginationInfo.page_size}
+          page={paginationInfo.page}
+          defaultPage={1}
+          siblingCount={0}
+          size="large"
+          shape="rounded"
+          onChange={(_e, value) => handleChange({ page: value })}
+        />
+      </Stack>
     </Box>
   );
 };

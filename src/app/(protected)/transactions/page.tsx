@@ -17,7 +17,7 @@ import useGetListTransaction from "./_hooks/use-get-list-transaction";
 import getTransactionStatus from "./_utils/transaction-status";
 
 const Component: FC = (): ReactElement => {
-  const { filters } = useFilter<TTransactionFilter>();
+  const { filters, setFilter } = useFilter<TTransactionFilter>();
   const query = useGetListTransaction({
     sort_by: "created_at",
     order: filters.order || "DESC",
@@ -107,10 +107,11 @@ const Component: FC = (): ReactElement => {
         columns={columns}
         checkboxSelection
         paginationInfo={createPaginationInfo({
+          per_page: 5,
           total: 10,
           page: 1,
         })}
-        handleChange={() => {}}
+        handleChange={setFilter}
       />
     </Page>
   );
