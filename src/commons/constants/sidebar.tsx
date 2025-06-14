@@ -28,7 +28,7 @@ export const SIDEBAR_ITEMS: TSidebarItem[] = [
   {
     key: "transaction",
     label: "Transaksi",
-    path: paths.transaction,
+    path: paths.transaction.list,
     icon: <PaidOutlined />,
     permissions: [PERMISSIONS.DEFAULT],
   },

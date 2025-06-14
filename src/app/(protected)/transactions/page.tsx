@@ -2,6 +2,7 @@ import { FC, ReactElement } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
 import { FileDownloadOutlined } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 import { Page, Chip } from "@/app/_components/ui";
 import DataTable from "@/app/_components/ui/data-table";
@@ -15,8 +16,10 @@ import { formatRupiah } from "@/utils/commons";
 import { TTransacion, TTransactionFilter } from "@/api/transactions/type";
 import useGetListTransaction from "./_hooks/use-get-list-transaction";
 import getTransactionStatus from "./_utils/transaction-status";
+import { paths } from "@/commons/constants/paths";
 
 const Component: FC = (): ReactElement => {
+  const navigate = useNavigate();
   const { filters, setFilter } = useFilter<TTransactionFilter>();
   const query = useGetListTransaction({
     sort_by: "created_at",
@@ -92,6 +95,7 @@ const Component: FC = (): ReactElement => {
       topPage={
         <Filter
           labelAdd="Tambah Booking"
+          onAdd={() => navigate(paths.transaction.create)}
           defaultValue={{
             search_value: filters.search_value,
             start_date: filters.start_date,

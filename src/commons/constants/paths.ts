@@ -1,6 +1,9 @@
 export const paths = {
   dashboard: "/dashboard",
-  transaction: "/transactions",
+  transaction: {
+    list: "/transactions",
+    create: "/transactions/create",
+  },
   master_data: {
     access_admin: {
       list: "/master-data/access-admin",
