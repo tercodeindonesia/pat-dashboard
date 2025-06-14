@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, FormGroup, InputLabel } from "@mui/material";
+import { FormControl, FormGroup, FormLabel } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { Controller, FieldValues, UseControllerProps } from "react-hook-form";
 import dayjs from "dayjs";
@@ -30,9 +30,9 @@ const FormDateField = <T extends FieldValues>({
       render={({ field, fieldState }) => (
         <FormControl sx={{ width: "100%" }}>
           {label ? (
-            <InputLabel htmlFor={field.name} error={fieldState.invalid} required={required}>
+            <FormLabel htmlFor={field.name} error={fieldState.invalid} required={required}>
               {label}
-            </InputLabel>
+            </FormLabel>
           ) : null}
           <FormGroup>
             <DatePicker

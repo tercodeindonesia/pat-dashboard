@@ -3,9 +3,9 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   FormControl,
   FormGroup,
+  FormLabel,
   IconButton,
   InputAdornment,
-  InputLabel,
   Switch,
   Typography,
 } from "@mui/material";
@@ -47,9 +47,9 @@ const FormTextField = <T extends FieldValues>({
         <FormControl variant="standard" sx={{ width: "100%" }}>
           {label ? (
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <InputLabel htmlFor={field.name} error={fieldState.invalid} required={required}>
+              <FormLabel htmlFor={field.name} error={fieldState.invalid} required={required}>
                 {label}
-              </InputLabel>
+              </FormLabel>
               {endLink ? (
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography variant="caption" mt={1}>
