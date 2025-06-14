@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, FormLabel, MenuItem, Select } from "@mui/material";
 import { Controller, FieldValues, UseControllerProps } from "react-hook-form";
 
 import HelperText from "../helper-text";
@@ -39,9 +39,9 @@ const FormDropdownField = <T extends FieldValues>({
           }}
         >
           {label ? (
-            <InputLabel required={required} error={fieldState.invalid}>
+            <FormLabel required={required} error={fieldState.invalid}>
               {label}
-            </InputLabel>
+            </FormLabel>
           ) : null}
           {/* Dropdown */}
           <Select

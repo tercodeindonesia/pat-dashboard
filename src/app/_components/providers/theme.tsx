@@ -35,6 +35,24 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
         styleOverrides: {
           root: {
             borderRadius: "10px",
+            backgroundColor: "rgba(244, 242, 244, 1)",
+          },
+          notchedOutline: {
+            borderColor: "transparent",
+          },
+        },
+      },
+      MuiFormLabel: {
+        styleOverrides: {
+          root: {
+            width: "fit-content",
+            display: "flex",
+            flexDirection: "row-reverse",
+            gap: "4px",
+            marginBottom: "14px",
+          },
+          asterisk: {
+            color: "rgba(208, 0, 0, 1)",
           },
         },
       },
@@ -56,7 +74,11 @@ const ThemeProvider: React.FC<React.PropsWithChildren> = () => {
       MuiPickersOutlinedInput: {
         styleOverrides: {
           root: {
+            backgroundColor: "rgba(244, 242, 244, 1)",
             borderRadius: "10px",
+          },
+          notchedOutline: {
+            borderColor: "transparent",
           },
         },
       },

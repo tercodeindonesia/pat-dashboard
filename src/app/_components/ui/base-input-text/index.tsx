@@ -15,7 +15,7 @@ const BaseInput = styled(MuiTextField)(() => ({
 }));
 
 const BaseInputText = (props: TextFieldProps) => {
-  return <BaseInput {...props} variant="outlined" />;
+  return <BaseInput {...props} />;
 };
 
 export default BaseInputText;
