@@ -32,7 +32,19 @@ const CreateTransactionPage = () => {
   };
 
   return (
-    <Page title="Data Transaksi">
+    <Page
+      title="Data Transaksi"
+      breadcrumbs={[
+        {
+          label: "Transaksi",
+          path: "/transactions",
+        },
+        {
+          label: "Tambah Transaksi",
+          path: null,
+        },
+      ]}
+    >
       <TransactionForm loading={false} handleSubmit={handleSubmit} defaultValues={{}} />
     </Page>
   );
