@@ -18,5 +18,19 @@ export type TTransacion = {
   created_by: Nullable<string>;
 };
 
+export type TTransactionRequest = {
+  fullname: string;
+  email: string;
+  phone: string;
+  address: string;
+  booking_date: string;
+  total_price: string;
+  status: string;
+  province: string;
+  city: string;
+  district: string;
+  postal_code: string;
+};
+
 export type TDetailTransactionResponse = TResponse<TTransacion>;
 export type TListTransactionResponse = TResponsePaginate<TTransacion>;
