@@ -1,14 +1,33 @@
+import { useEffect } from "react";
+import { Button, Grid, Stack } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import FormDateField from "@/app/_components/ui/form-date-field";
 import FormDropdownField from "@/app/_components/ui/form-dropdown-field";
 import FormTextField from "@/app/_components/ui/form-text-field";
-import { Button, Grid, Stack } from "@mui/material";
-import { useForm } from "react-hook-form";
 
-const TransactionForm = () => {
-  const form = useForm();
+import { TransactionSchema, TTransactionFormData } from "./schema";
+
+interface Props {
+  loading?: boolean;
+  isEdit?: boolean;
+  handleSubmit: (data: TTransactionFormData) => void;
+  defaultValues?: Partial<TTransactionFormData>;
+}
+
+const TransactionForm = ({ loading, handleSubmit, defaultValues }: Props) => {
+  const form = useForm<TTransactionFormData>({
+    resolver: zodResolver(TransactionSchema),
+    mode: "onChange",
+  });
+
+  useEffect(() => {
+    form.reset(defaultValues);
+  }, []);
 
   return (
-    <form>
+    <form onSubmit={form.handleSubmit(handleSubmit)}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 6 }}>
           <FormTextField
@@ -57,11 +76,11 @@ const TransactionForm = () => {
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
           <FormDropdownField
-            label="Proses"
+            label="Status"
             control={form.control}
-            name="process"
+            name="status"
             required
-            placeholder="Proses"
+            placeholder="Pilih Status"
             options={[]}
           />
         </Grid>
@@ -123,7 +142,7 @@ const TransactionForm = () => {
           mt: "24px",
         }}
       >
-        <Button type="submit" variant="contained">
+        <Button loading={loading} type="submit" variant="contained">
           Simpan
         </Button>
       </Stack>

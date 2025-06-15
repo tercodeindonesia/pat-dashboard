@@ -2,11 +2,18 @@ import { generatePath } from "react-router";
 import { api } from "@/libs/axios/api";
 
 import { TDetailParams } from "../common";
-import { TDetailTransactionResponse, TListTransactionResponse, TTransactionFilter } from "./type";
+import {
+  TDetailTransactionResponse,
+  TListTransactionResponse,
+  TTransactionFilter,
+  TTransactionRequest,
+} from "./type";
+import { TDefaultResponse } from "@/commons/types/response";
 
 const endpoints = {
   list: "/transactions",
   detail: "/transactions/:id",
+  create: "/transactions/create",
 };
 
 export const getListTransaction = async (
@@ -80,5 +87,10 @@ export const getDetailTransaction = async (
   params: TDetailParams,
 ): Promise<TDetailTransactionResponse> => {
   const res = await api.get(generatePath(endpoints.detail, { params }));
+  return res.data;
+};
+
+export const createTransaction = async (req: TTransactionRequest): Promise<TDefaultResponse> => {
+  const res = await api.post(endpoints.create, { data: req });
   return res.data;
 };
