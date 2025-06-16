@@ -2,7 +2,7 @@ import { FC, ReactElement } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
 import { FileDownloadOutlined } from "@mui/icons-material";
-import { useNavigate } from "react-router";
+import { generatePath, useNavigate } from "react-router";
 
 import { Page, Chip } from "@/app/_components/ui";
 import DataTable from "@/app/_components/ui/data-table";
@@ -41,10 +41,10 @@ const Component: FC = (): ReactElement => {
       renderCell: (params) => formatDate(params.row.booking_date) ?? "-",
     },
     {
-      field: "total_transaction",
+      field: "total_price",
       headerName: "Total Transaksi",
       width: 150,
-      renderCell: (params) => formatRupiah(params.row?.total_transaction) ?? "-",
+      renderCell: (params) => formatRupiah(params.row?.total_price) ?? "-",
     },
     {
       field: "status",
@@ -63,13 +63,14 @@ const Component: FC = (): ReactElement => {
       width: 150,
       sortable: false,
       filterable: false,
-      renderCell: () => (
+      renderCell: (params) => (
         <ActionButtonTable
           items={[
             {
               key: "edit",
               type: "edit",
-              onClick: () => {},
+              onClick: () =>
+                navigate(generatePath(paths.transaction.edit, { id: params.row.booking_id })),
             },
             {
               key: "detail",

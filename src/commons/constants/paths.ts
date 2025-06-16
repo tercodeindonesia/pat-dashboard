@@ -3,6 +3,7 @@ export const paths = {
   transaction: {
     list: "/transactions",
     create: "/transactions/create",
+    edit: "/transactions/:id/edit",
   },
   master_data: {
     access_admin: {

@@ -1,5 +1,5 @@
 import { NavigateNextOutlined } from "@mui/icons-material";
-import { Box, Breadcrumbs, Divider, Link, Paper, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Divider, Link, Paper, Skeleton, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router";
 
 interface Props {
@@ -10,9 +10,10 @@ interface Props {
     label: string;
     path: string | null;
   }[];
+  loading?: boolean;
 }
 
-const Page = ({ children, topPage, title, breadcrumbs }: Props) => {
+const Page = ({ children, topPage, title, breadcrumbs, loading }: Props) => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "16px", paddingBottom: "36px" }}>
       {breadcrumbs?.length ? (
@@ -55,7 +56,20 @@ const Page = ({ children, topPage, title, breadcrumbs }: Props) => {
             </Box>
           )}
 
-          <Box sx={{ marginTop: "16px" }}>{children}</Box>
+          {loading ? (
+            <Box
+              sx={{
+                ".MuiSkeleton-root": {
+                  transform: "scale(1, 0.80)",
+                },
+              }}
+            >
+              <Skeleton height={80} />
+              <Skeleton height={80} />
+            </Box>
+          ) : (
+            <Box sx={{ marginTop: "16px" }}>{children}</Box>
+          )}
         </Box>
       </Paper>
     </Box>
