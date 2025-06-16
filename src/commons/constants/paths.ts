@@ -8,6 +8,8 @@ export const paths = {
   master_data: {
     access_admin: {
       list: "/master-data/access-admin",
+      create: "/master-data/access-admin/create",
+      edit: "/master-data/access-admin/:id/edit",
     },
     facilities: {
       list: "/master-data/facilities",
