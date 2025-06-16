@@ -10,12 +10,15 @@ import FormDateField from "../form-date-field";
 import FormTextField from "../form-text-field";
 import FormDropdownField from "../form-dropdown-field";
 
+type Variants = "search" | "download" | "date_range";
+
 interface FilterProps {
   onAdd?: () => void;
   labelAdd?: string;
   withPriode?: boolean;
   withAddButton?: boolean;
   labelSearch?: string;
+  variants?: Variants[];
   filterGroup?: {
     label: string;
     name: string;
@@ -31,6 +34,7 @@ const Filter = ({
   filterGroup,
   onAdd,
   labelAdd = "Tambah Produk",
+  variants = ["search", "download", "date_range"],
   // withPriode = true,
   withAddButton = true,
   defaultValue,
@@ -63,12 +67,24 @@ const Filter = ({
     }
   }, [defaultValue]);
 
+  const getMdSize = (length: number) => {
+    switch (length) {
+      case 1:
+      case 2:
+        return 12;
+      case 3:
+        return 6;
+      default:
+        return 12;
+    }
+  };
+
   return (
     <>
       <Grid container alignItems="center">
         <Grid size={{ xs: 12, md: 10 }}>
-          <Grid container alignItems="center" spacing={3} sx={{ width: "fit-content" }}>
-            <Grid size={{ xs: 12, md: 6 }}>
+          <Grid container alignItems="center" spacing={3} sx={{ width: "100%" }}>
+            <Grid size={{ xs: 12, md: getMdSize(variants.length) }}>
               <Stack
                 direction="row"
                 spacing={1}
@@ -97,59 +113,65 @@ const Filter = ({
                     />
                   )}
                 />
-                <Button
-                  variant="text"
-                  sx={{
-                    padding: "4px 23px",
-                  }}
-                  onClick={() => {
-                    // setDownloadPopup(true);
-                  }}
-                >
-                  <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-                    <Box
-                      sx={{
-                        backgroundColor: "rgba(36, 174, 95, 0.12)",
-                        padding: "4px",
-                        borderRadius: "8px",
-                        width: "32px",
-                        height: "32px",
-                      }}
-                    >
-                      <FileDownloadOutlined
+                {variants.includes("download") ? (
+                  <Button
+                    variant="text"
+                    sx={{
+                      padding: "4px 23px",
+                    }}
+                    onClick={() => {
+                      // setDownloadPopup(true);
+                    }}
+                  >
+                    <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+                      <Box
                         sx={{
-                          color: "#24AE5F",
+                          backgroundColor: "rgba(36, 174, 95, 0.12)",
+                          padding: "4px",
+                          borderRadius: "8px",
+                          width: "32px",
+                          height: "32px",
                         }}
-                      />
-                    </Box>
-                    <Typography
-                      sx={{
-                        fontSize: "15px",
-                        fontWeight: 500,
-                      }}
-                    >
-                      Excel
-                    </Typography>
-                  </Stack>
-                </Button>
+                      >
+                        <FileDownloadOutlined
+                          sx={{
+                            color: "#24AE5F",
+                          }}
+                        />
+                      </Box>
+                      <Typography
+                        sx={{
+                          fontSize: "15px",
+                          fontWeight: 500,
+                        }}
+                      >
+                        Excel
+                      </Typography>
+                    </Stack>
+                  </Button>
+                ) : null}
               </Stack>
             </Grid>
-            <Grid size={{ xs: 12, md: 3 }}>
-              <FormDateField
-                control={control}
-                name="start_date"
-                format="YYYY-MM-DD"
-                placeholder="Dari Tanggal"
-              />
-            </Grid>
-            <Grid size={{ xs: 12, md: 3 }}>
-              <FormDateField
-                control={control}
-                name="end_date"
-                format="YYYY-MM-DD"
-                placeholder="Sampai Tanggal"
-              />
-            </Grid>
+            {variants.includes("date_range") ? (
+              <>
+                <Grid size={{ xs: 12, md: 3 }}>
+                  <FormDateField
+                    control={control}
+                    name="start_date"
+                    format="YYYY-MM-DD"
+                    placeholder="Dari Tanggal"
+                  />
+                </Grid>
+                <Grid size={{ xs: 12, md: 3 }}>
+                  <FormDateField
+                    control={control}
+                    name="end_date"
+                    format="YYYY-MM-DD"
+                    placeholder="Sampai Tanggal"
+                  />
+                </Grid>
+              </>
+            ) : null}
           </Grid>
         </Grid>
         {withAddButton ? (
