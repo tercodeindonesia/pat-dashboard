@@ -1,5 +1,7 @@
-import { useNotifications } from "@toolpad/core/useNotifications";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router";
 
+import { paths } from "@/commons/constants/paths";
 import { Page } from "@/app/_components/ui";
 import { TTransactionRequest } from "@/api/transactions/type";
 
@@ -8,7 +10,8 @@ import useCreateTransaction from "./_hooks/use-create-transaction";
 import { TTransactionFormData } from "../_components/form/schema";
 
 const CreateTransactionPage = () => {
-  const notification = useNotifications();
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const mutation = useCreateTransaction();
 
@@ -17,16 +20,11 @@ const CreateTransactionPage = () => {
 
     mutation.mutate(payload, {
       onSuccess: () => {
-        notification.show("Berhasil menambahkan Transaksi", {
-          severity: "success",
-          autoHideDuration: 3000,
-        });
+        enqueueSnackbar("Berhasil menambahkan Transaksi", { variant: "success" });
+        navigate(paths.transaction.list);
       },
       onError: () => {
-        notification.show("Gagal menambahkan Transkasi", {
-          severity: "error",
-          autoHideDuration: 3000,
-        });
+        enqueueSnackbar("Gagal menambahkan Transaksi", { variant: "error" });
       },
     });
   };

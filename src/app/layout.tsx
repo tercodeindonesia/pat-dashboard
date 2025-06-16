@@ -1,3 +1,4 @@
+import { SnackbarProvider } from "notistack";
 import LocalizationProvider from "./_components/providers/localization";
 import SessionProvider from "./_components/providers/session";
 import ThemeProvider from "./_components/providers/theme";
@@ -7,7 +8,9 @@ function MainLayout() {
   return (
     <SessionProvider>
       <LocalizationProvider>
-        <ThemeProvider />
+        <SnackbarProvider>
+          <ThemeProvider />
+        </SnackbarProvider>
       </LocalizationProvider>
     </SessionProvider>
   );

@@ -67,6 +67,7 @@ const TransactionForm = ({ loading, handleSubmit, defaultValues }: Props) => {
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
           <FormTextField
+            type="number"
             label="Total Harga"
             control={form.control}
             name="total_price"
@@ -81,7 +82,20 @@ const TransactionForm = ({ loading, handleSubmit, defaultValues }: Props) => {
             name="status"
             required
             placeholder="Pilih Status"
-            options={[]}
+            options={[
+              {
+                label: "Sukses",
+                value: "success",
+              },
+              {
+                label: "Dibatalkan",
+                value: "cancel",
+              },
+              {
+                label: "Menunggu",
+                value: "pending",
+              },
+            ]}
           />
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
