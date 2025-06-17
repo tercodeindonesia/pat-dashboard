@@ -13,6 +13,8 @@ export const paths = {
     },
     facilities: {
       list: "/master-data/facilities",
+      create: "/master-data/facilities/create",
+      edit: "/master-data/facilities/:id/edit",
     },
     weeding_package: {
       list: "/master-data/wedding-packages",
