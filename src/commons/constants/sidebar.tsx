@@ -53,7 +53,7 @@ export const SIDEBAR_ITEMS: TSidebarItem[] = [
       {
         key: "master-data-weeding-package",
         label: "Paket Pernikahan",
-        path: paths.master_data.weeding_package.list,
+        path: paths.master_data.wedding_packages.list,
         permissions: [PERMISSIONS.DEFAULT],
       },
       {
