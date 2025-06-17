@@ -11,12 +11,12 @@ export type TAccessAdmin = {
   email: string;
   phone: string;
   password: string;
-  foto: string | null;
+  foto: string;
   role: string;
   created_by: string;
 };
 
-export type TAccessAdminRequest = Omit<TAccessAdmin, "created_by"> & {};
+export type TAccessAdminRequest = Omit<TAccessAdmin, "created_by" | "user_id"> & {};
 
 export type TDetailAccessAdminResponse = TResponse<Nullable<TAccessAdmin>>;
 export type TListAccessAdminResponse = TResponsePaginate<TAccessAdmin>;
