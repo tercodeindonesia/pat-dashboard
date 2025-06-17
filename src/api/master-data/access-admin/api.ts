@@ -26,8 +26,8 @@ const mock: TAccessAdmin[] = [
     email: "nizar@example.com",
     phone: "081234567890",
     password: "hashedPassword1",
-    foto: null,
-    role: "superadmin",
+    foto: "https://example.com/images/rahma.jpg",
+    role: "reporting",
     created_by: "system",
   },
   {
@@ -38,7 +38,7 @@ const mock: TAccessAdmin[] = [
     phone: "081298765432",
     password: "hashedPassword2",
     foto: "https://example.com/images/rahma.jpg",
-    role: "admin",
+    role: "management",
     created_by: "1",
   },
   {
@@ -48,8 +48,8 @@ const mock: TAccessAdmin[] = [
     email: "budi@example.com",
     phone: "082112223334",
     password: "hashedPassword3",
-    foto: null,
-    role: "moderator",
+    foto: "https://example.com/images/rahma.jpg",
+    role: "reporting",
     created_by: "1",
   },
   {
@@ -60,7 +60,7 @@ const mock: TAccessAdmin[] = [
     phone: "081355512345",
     password: "hashedPassword4",
     foto: "https://example.com/images/lisa.jpg",
-    role: "admin",
+    role: "management",
     created_by: "2",
   },
   {
@@ -70,7 +70,7 @@ const mock: TAccessAdmin[] = [
     email: "dedi@example.com",
     phone: "081377788899",
     password: "hashedPassword5",
-    foto: null,
+    foto: "https://example.com/images/rahma.jpg",
     role: "editor",
     created_by: "3",
   },
