@@ -1,4 +1,4 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { generatePath, useNavigate } from "react-router";
 
@@ -12,10 +12,13 @@ import { useFilter } from "@/app/_hooks/use-filter";
 import { TAccessAdmin, TAccessAdminFilter } from "@/api/master-data/access-admin/type";
 import useGetListAccessAdmin from "./_hooks/use-get-list-access-admin";
 import { paths } from "@/commons/constants/paths";
+import { Button } from "@mui/material";
+import { AddOutlined, DeleteOutlined } from "@mui/icons-material";
 
 const Component: FC = (): ReactElement => {
   const navigate = useNavigate();
   const { filters, setFilter } = useFilter<TAccessAdminFilter>();
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const query = useGetListAccessAdmin({
     sort_by: "created_at",
     order: filters.order || "DESC",
@@ -55,8 +58,8 @@ const Component: FC = (): ReactElement => {
                 ),
             },
             {
-              key: "detail",
-              type: "detail",
+              key: "delete",
+              type: "delete",
               onClick: () => {},
             },
           ]}
@@ -80,11 +83,26 @@ const Component: FC = (): ReactElement => {
       topPage={
         <Filter
           variants={["search"]}
-          labelAdd="Tambah Admin"
-          onAdd={() => navigate(paths.master_data.access_admin.create)}
           defaultValue={{
             search_value: filters.search_value,
           }}
+          actions={[
+            <Button
+              key="add"
+              variant="contained"
+              startIcon={<AddOutlined />}
+              onClick={() => navigate(paths.master_data.access_admin.create)}
+            >
+              Tamba Admin
+            </Button>,
+            ...(selectedIds.length
+              ? [
+                  <Button key="delete" variant="outlined" startIcon={<DeleteOutlined />}>
+                    Delete
+                  </Button>,
+                ]
+              : []),
+          ]}
         />
       }
     >
@@ -100,6 +118,9 @@ const Component: FC = (): ReactElement => {
           page: 1,
         })}
         handleChange={setFilter}
+        onRowSelectionModelChange={(ids) => {
+          setSelectedIds(ids);
+        }}
       />
     </Page>
   );

@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { Button, Grid, Stack } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import FormDropdownField from "@/app/_components/ui/form-dropdown-field";
 import FormTextField from "@/app/_components/ui/form-text-field";
 
 import { AccessAdminSchema, TAccessAdminFormData } from "./schema";
+import FormUploadField from "@/app/_components/ui/form-upload-field";
 
 interface Props {
   loading?: boolean;
@@ -81,12 +82,23 @@ const AccessAdminForm = ({ loading, handleSubmit, defaultValues }: Props) => {
           />
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
-          <FormTextField
-            label="Upload Foto"
+          <Controller
             control={form.control}
             name="foto"
-            required
-            placeholder="Foto"
+            render={({ field, fieldState }) => (
+              <FormUploadField
+                label="Upload Foto"
+                uploadDesc="Format Foto JPG, PNG, JPEG. Ukuran Maksimal 2 MB"
+                name={field.name}
+                value={field.value}
+                error={fieldState.invalid}
+                helper={fieldState.error?.message}
+                required
+                onChange={() => {
+                  // handleUpload("image_url", event);
+                }}
+              />
+            )}
           />
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
