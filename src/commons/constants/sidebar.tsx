@@ -59,7 +59,7 @@ export const SIDEBAR_ITEMS: TSidebarItem[] = [
       {
         key: "master-data-vendor",
         label: "Vendor",
-        path: paths.master_data.vendor.list,
+        path: paths.master_data.vendors.list,
         permissions: [PERMISSIONS.DEFAULT],
       },
       {
