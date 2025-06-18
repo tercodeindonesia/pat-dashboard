@@ -21,8 +21,10 @@ export const paths = {
       create: "/master-data/wedding-packages/create",
       edit: "/master-data/wedding-packages/:id/edit",
     },
-    vendor: {
+    vendors: {
       list: "/master-data/vendors",
+      create: "/master-data/vendors/create",
+      edit: "/master-data/vendors/:id/edit",
     },
     contacts: {
       list: "/master-data/contacts",
