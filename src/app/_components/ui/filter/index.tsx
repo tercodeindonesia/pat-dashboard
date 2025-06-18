@@ -13,6 +13,9 @@ import FormDropdownField from "../form-dropdown-field";
 type Variants = "search" | "download" | "date_range";
 
 interface FilterProps {
+  /**
+   * @deprecated Use `actions` instead.
+   */
   onAdd?: () => void;
   /**
    * @deprecated Use `actions` instead.
