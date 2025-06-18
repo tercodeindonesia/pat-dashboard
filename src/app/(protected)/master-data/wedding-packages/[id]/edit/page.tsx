@@ -59,7 +59,7 @@ const EditWeddingPackagesPage = () => {
         defaultValues={{
           package_name: data?.package_name,
           package_type: data?.package_type,
-          package_facilities: data?.package_facilities?.map((facility) => facility.facility_id) || [],
+          package_facilities: data?.package_facilities?.map((facility) => facility.id) || [],
         }}
       />
     </Page>

@@ -31,8 +31,7 @@ const Component: FC = (): ReactElement => {
       field: "package_facilities",
       headerName: "Fasilitas Paket",
       width: 300,
-      renderCell: (params) =>
-        params.row.package_facilities.map((item) => item.facility_name).join(", "),
+      renderCell: (params) => params.row.package_facilities.map((item) => item.name).join(", "),
     },
     {
       field: "actions",

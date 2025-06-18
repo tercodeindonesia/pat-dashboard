@@ -20,56 +20,44 @@ const endpoints = {
 
 const mock: TFacilities[] = [
   {
-    facility_id: "1",
-    facility_name: "Aula Utama",
-    equipment_list: [
-      { name: "Sound System" },
-      { name: "Proyektor" },
-      { name: "AC" },
-      { name: "Kursi 200 buah" },
-    ],
-    parking_info: "Tersedia 50 slot parkir mobil dan 100 slot parkir motor",
+    id: "1",
+    name: "Taman Bermain Anak",
+    type: {
+      id: "A",
+      name: "Rekreasi",
+    },
   },
   {
-    facility_id: "2",
-    facility_name: "Ruang VIP",
-    equipment_list: [
-      { name: "Sound System Premium" },
-      { name: "LED TV 65 inch" },
-      { name: "AC Central" },
-      { name: "Kursi VIP 50 buah" },
-    ],
-    parking_info: "Tersedia 20 slot parkir mobil VIP",
+    id: "2",
+    name: "Kolam Renang Umum",
+    type: {
+      id: "B",
+      name: "Olahraga",
+    },
   },
   {
-    facility_id: "3",
-    facility_name: "Taman Outdoor",
-    equipment_list: [{ name: "Tenda" }, { name: "Lampu Hias" }, { name: "Sound System Outdoor" }],
-    parking_info: "Tersedia 30 slot parkir mobil dan 80 slot parkir motor",
+    id: "3",
+    name: "Pos Keamanan 24 Jam",
+    type: {
+      id: "C",
+      name: "Keamanan",
+    },
   },
   {
-    facility_id: "4",
-    facility_name: "Ruang Meeting",
-    equipment_list: [
-      { name: "Proyektor" },
-      { name: "Whiteboard" },
-      { name: "AC" },
-      { name: "Meja Meeting" },
-      { name: "Kursi 20 buah" },
-    ],
-    parking_info: "Tersedia 15 slot parkir mobil",
+    id: "4",
+    name: "Ruang Serbaguna",
+    type: {
+      id: "D",
+      name: "Fasilitas Sosial",
+    },
   },
   {
-    facility_id: "5",
-    facility_name: "Ballroom",
-    equipment_list: [
-      { name: "Sound System Professional" },
-      { name: "Lighting System" },
-      { name: "AC Central" },
-      { name: "Stage" },
-      { name: "Kursi 300 buah" },
-    ],
-    parking_info: "Tersedia 80 slot parkir mobil dan 150 slot parkir motor",
+    id: "5",
+    name: "Jalur Jogging",
+    type: {
+      id: "B",
+      name: "Olahraga",
+    },
   },
 ];
 
@@ -102,7 +90,7 @@ export const getDetailFacilities = async (
     code: 200,
     message: "Berhasil",
     status: true,
-    result: mock.find((item) => item.facility_id === params?.id) || null,
+    result: mock.find((item) => item.id === params?.id) || null,
   });
 
   const res = await api.get(generatePath(endpoints.detail, { params }));

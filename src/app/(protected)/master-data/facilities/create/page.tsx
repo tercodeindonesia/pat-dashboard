@@ -16,7 +16,10 @@ const CreatePage = () => {
   const mutation = useCreateFacilities();
 
   const handleSubmit = (data: TFacilitiesFormData) => {
-    const payload: TFacilitiesRequest = data;
+    const payload: TFacilitiesRequest = {
+      ...data,
+      id: data.type.value,
+    };
 
     mutation.mutate(payload, {
       onSuccess: () => {
