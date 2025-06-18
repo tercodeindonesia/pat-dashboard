@@ -14,9 +14,16 @@ type Variants = "search" | "download" | "date_range";
 
 interface FilterProps {
   onAdd?: () => void;
+  /**
+   * @deprecated Use `actions` instead.
+   */
   labelAdd?: string;
   withPriode?: boolean;
+  /**
+   * @deprecated Use `actions` instead.
+   */
   withAddButton?: boolean;
+  actions?: React.ReactNode[];
   labelSearch?: string;
   variants?: Variants[];
   filterGroup?: {
@@ -31,12 +38,13 @@ interface FilterProps {
 }
 
 const Filter = ({
+  actions,
   filterGroup,
   onAdd,
   labelAdd = "Tambah Produk",
   variants = ["search", "download", "date_range"],
   // withPriode = true,
-  withAddButton = true,
+  withAddButton = false,
   defaultValue,
   labelSearch = "",
 }: FilterProps) => {
@@ -67,121 +75,112 @@ const Filter = ({
     }
   }, [defaultValue]);
 
-  const getMdSize = (length: number) => {
-    switch (length) {
-      case 1:
-      case 2:
-        return 12;
-      case 3:
-        return 6;
-      default:
-        return 12;
-    }
-  };
-
   return (
     <>
-      <Grid container alignItems="center">
-        <Grid size={{ xs: 12, md: 10 }}>
-          <Grid container alignItems="center" spacing={3} sx={{ width: "100%" }}>
-            <Grid size={{ xs: 12, md: getMdSize(variants.length) }}>
-              <Stack
-                direction="row"
-                spacing={1}
-                sx={{
-                  alignItems: "center",
+      <Stack
+        direction="row"
+        sx={{
+          flexWrap: "wrap",
+          gap: "16px",
+        }}
+      >
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            alignItems: "center",
+            flex: 1,
+            minWidth: "500px",
+          }}
+        >
+          <Controller
+            control={control}
+            name="search_value"
+            render={({ field }) => (
+              <TextField
+                value={field.value || ""}
+                onChange={field.onChange}
+                variant="outlined"
+                placeholder={`Cari ${labelSearch}`}
+                fullWidth
+                slotProps={{
+                  input: {
+                    endAdornment: <SearchOutlined color="disabled" />,
+                  },
                 }}
-              >
-                <Controller
-                  control={control}
-                  name="search_value"
-                  render={({ field }) => (
-                    <TextField
-                      value={field.value || ""}
-                      onChange={field.onChange}
-                      variant="outlined"
-                      placeholder={`Cari ${labelSearch}`}
-                      fullWidth
-                      slotProps={{
-                        input: {
-                          endAdornment: <SearchOutlined color="disabled" />,
-                        },
-                      }}
-                      sx={{
-                        backgroundColor: "white",
-                      }}
-                    />
-                  )}
-                />
-                {variants.includes("download") ? (
-                  <Button
-                    variant="text"
+                sx={{
+                  backgroundColor: "white",
+                }}
+              />
+            )}
+          />
+          {variants.includes("download") ? (
+            <Button
+              variant="text"
+              sx={{
+                padding: "4px 23px",
+              }}
+              onClick={() => {
+                // setDownloadPopup(true);
+              }}
+            >
+              <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+                <Box
+                  sx={{
+                    backgroundColor: "rgba(36, 174, 95, 0.12)",
+                    padding: "4px",
+                    borderRadius: "8px",
+                    width: "32px",
+                    height: "32px",
+                  }}
+                >
+                  <FileDownloadOutlined
                     sx={{
-                      padding: "4px 23px",
+                      color: "#24AE5F",
                     }}
-                    onClick={() => {
-                      // setDownloadPopup(true);
-                    }}
-                  >
-                    <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-                      <Box
-                        sx={{
-                          backgroundColor: "rgba(36, 174, 95, 0.12)",
-                          padding: "4px",
-                          borderRadius: "8px",
-                          width: "32px",
-                          height: "32px",
-                        }}
-                      >
-                        <FileDownloadOutlined
-                          sx={{
-                            color: "#24AE5F",
-                          }}
-                        />
-                      </Box>
-                      <Typography
-                        sx={{
-                          fontSize: "15px",
-                          fontWeight: 500,
-                        }}
-                      >
-                        Excel
-                      </Typography>
-                    </Stack>
-                  </Button>
-                ) : null}
+                  />
+                </Box>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: 500,
+                  }}
+                >
+                  Excel
+                </Typography>
               </Stack>
-            </Grid>
-            {variants.includes("date_range") ? (
-              <>
-                <Grid size={{ xs: 12, md: 3 }}>
-                  <FormDateField
-                    control={control}
-                    name="start_date"
-                    format="YYYY-MM-DD"
-                    placeholder="Dari Tanggal"
-                  />
-                </Grid>
-                <Grid size={{ xs: 12, md: 3 }}>
-                  <FormDateField
-                    control={control}
-                    name="end_date"
-                    format="YYYY-MM-DD"
-                    placeholder="Sampai Tanggal"
-                  />
-                </Grid>
-              </>
-            ) : null}
-          </Grid>
-        </Grid>
-        {withAddButton ? (
-          <Grid size={{ xs: 12, md: 2 }} sx={{ textAlign: "right" }}>
-            <Button variant="contained" onClick={onAdd} startIcon={<Add />}>
-              {labelAdd}
             </Button>
-          </Grid>
+          ) : null}
+        </Stack>
+
+        {variants.includes("date_range") ? (
+          <>
+            <Box>
+              <FormDateField
+                control={control}
+                name="start_date"
+                format="YYYY-MM-DD"
+                placeholder="Dari Tanggal"
+              />
+            </Box>
+            <Box>
+              <FormDateField
+                control={control}
+                name="end_date"
+                format="YYYY-MM-DD"
+                placeholder="Sampai Tanggal"
+              />
+            </Box>
+          </>
         ) : null}
-      </Grid>
+
+        {withAddButton ? (
+          <Button variant="contained" onClick={onAdd} startIcon={<Add />}>
+            {labelAdd}
+          </Button>
+        ) : null}
+        {actions?.length ? actions.map((item) => item) : null}
+      </Stack>
       {filterGroup ? (
         <Collapse in={moreFilter} sx={{ width: "100%" }}>
           <Box
