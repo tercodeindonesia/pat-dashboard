@@ -1,7 +1,7 @@
 import { FC, ReactElement } from "react";
 import { GridColDef } from "@mui/x-data-grid";
-import { IconButton } from "@mui/material";
-import { FileDownloadOutlined } from "@mui/icons-material";
+import { Button, IconButton } from "@mui/material";
+import { AddOutlined, FileDownloadOutlined } from "@mui/icons-material";
 import { generatePath, useNavigate } from "react-router";
 
 import { Page, Chip } from "@/app/_components/ui";
@@ -95,13 +95,21 @@ const Component: FC = (): ReactElement => {
     <Page
       topPage={
         <Filter
-          labelAdd="Tambah Booking"
-          onAdd={() => navigate(paths.transaction.create)}
           defaultValue={{
             search_value: filters.search_value,
             start_date: filters.start_date,
             end_date: filters.end_date,
           }}
+          actions={[
+            <Button
+              key="add"
+              variant="contained"
+              startIcon={<AddOutlined />}
+              onClick={() => navigate(paths.master_data.access_admin.create)}
+            >
+              Tambah Admin
+            </Button>,
+          ]}
         />
       }
     >
