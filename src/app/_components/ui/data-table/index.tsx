@@ -6,9 +6,14 @@ import { TFilterParams } from "@/commons/types/filter";
 export interface DataTableProps
   extends Omit<
     DataGridProps,
-    "pageSizeOptions" | "paginationModel" | "paginationMode" | "rowCount"
+    | "pageSizeOptions"
+    | "paginationModel"
+    | "paginationMode"
+    | "rowCount"
+    | "onRowSelectionModelChange"
   > {
   handleChange: (pagination: Pick<TFilterParams, "page" | "per_page">) => void;
+  onRowSelectionModelChange?: (ids: string[]) => void;
   paginationInfo: {
     total?: number;
     page_size: number;
@@ -17,7 +22,12 @@ export interface DataTableProps
   };
 }
 
-const DataTable = ({ handleChange, paginationInfo, ...others }: DataTableProps) => {
+const DataTable = ({
+  onRowSelectionModelChange,
+  handleChange,
+  paginationInfo,
+  ...others
+}: DataTableProps) => {
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
@@ -25,6 +35,9 @@ const DataTable = ({ handleChange, paginationInfo, ...others }: DataTableProps) 
         hideFooterPagination
         hideFooter
         disableRowSelectionOnClick
+        onRowSelectionModelChange={(data) => {
+          onRowSelectionModelChange?.([...data.ids] as string[]);
+        }}
         sx={{
           "& .MuiDataGrid-row:nth-of-type(even)": {
             backgroundColor: "#f9f9f9",
