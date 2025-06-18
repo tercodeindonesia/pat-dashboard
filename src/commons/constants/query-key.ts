@@ -16,5 +16,8 @@ export const queryKeys = {
       list: "master-data/wedding-packages/list",
       detail: "master-data/wedding-packages/detail",
     },
+    contact: {
+      detail: "master-data/contact",
+    },
   },
 } as const;
