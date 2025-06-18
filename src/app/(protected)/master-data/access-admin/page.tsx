@@ -93,7 +93,7 @@ const Component: FC = (): ReactElement => {
               startIcon={<AddOutlined />}
               onClick={() => navigate(paths.master_data.access_admin.create)}
             >
-              Tamba Admin
+              Tambah Admin
             </Button>,
             ...(selectedIds.length
               ? [

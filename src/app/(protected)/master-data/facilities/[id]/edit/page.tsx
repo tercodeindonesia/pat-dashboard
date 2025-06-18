@@ -21,7 +21,10 @@ const EditFacilitiesPage = () => {
   const mutation = useEditFacilities({ id: params.id! });
 
   const handleSubmit = (data: TFacilitiesFormData) => {
-    const payload: TFacilitiesRequest = data;
+    const payload: TFacilitiesRequest = {
+      ...data,
+      id: data.type.value,
+    };
 
     mutation.mutate(payload, {
       onSuccess: () => {
@@ -57,9 +60,8 @@ const EditFacilitiesPage = () => {
         loading={mutation.isPending}
         handleSubmit={handleSubmit}
         defaultValues={{
-          facility_name: data?.facility_name,
-          equipment_list: data?.equipment_list,
-          parking_info: data?.parking_info,
+          name: data?.name,
+          type: { label: data?.type.name || "", value: data?.type.id || "" },
         }}
       />
     </Page>

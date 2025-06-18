@@ -68,20 +68,18 @@ const WeddingPackagesForm = ({ loading, handleSubmit, defaultValues }: Props) =>
                 <Autocomplete
                   multiple
                   options={facilitiesOptions}
-                  getOptionLabel={(option) => option.facility_name}
-                  value={facilitiesOptions.filter((facility) =>
-                    field.value?.includes(facility.facility_id),
-                  )}
+                  getOptionLabel={(option) => option.name}
+                  value={facilitiesOptions.filter((facility) => field.value?.includes(facility.id))}
                   onChange={(_, newValue) => {
-                    field.onChange(newValue.map((facility) => facility.facility_id));
+                    field.onChange(newValue.map((facility) => facility.id));
                   }}
                   renderValue={(value, getTagProps) =>
                     value.map((option, index) => (
                       <Chip
                         variant="outlined"
-                        label={option.facility_name}
+                        label={option.name}
                         {...getTagProps({ index })}
-                        key={option.facility_id}
+                        key={option.id}
                       />
                     ))
                   }

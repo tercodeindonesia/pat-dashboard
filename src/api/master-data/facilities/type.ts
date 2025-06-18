@@ -5,13 +5,17 @@ import { TResponse, TResponsePaginate } from "@/commons/types/response";
 export type TFacilitiesFilter = TFilterParams;
 
 export type TFacilities = {
-  facility_id: string;
-  facility_name: string;
-  equipment_list: { name: string }[];
-  parking_info: string;
+  id: string;
+  name: string;
+  type: {
+    id: string;
+    name: string;
+  };
 };
 
-export type TFacilitiesRequest = Omit<TFacilities, "facility_id"> & {};
+export type TFacilitiesRequest = Omit<TFacilities, "id" | "type"> & {
+  id: string;
+};
 
 export type TDetailFacilitiesResponse = TResponse<Nullable<TFacilities>>;
 export type TListFacilitiesResponse = TResponsePaginate<TFacilities>;

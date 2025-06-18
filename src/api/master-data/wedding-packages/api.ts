@@ -23,89 +23,19 @@ const mock: TWeddingPackages[] = [
     package_id: "1",
     package_name: "Paket Silver",
     package_type: "Basic",
-    package_facilities: [
-      {
-        facility_id: "1",
-        facility_name: "Aula Utama",
-        equipment_list: [
-          { name: "Sound System" },
-          { name: "Proyektor" },
-          { name: "AC" },
-          { name: "Kursi 200 buah" },
-        ],
-        parking_info: "Tersedia 50 slot parkir mobil dan 100 slot parkir motor",
-      },
-    ],
+    package_facilities: [],
   },
   {
     package_id: "2",
     package_name: "Paket Gold",
     package_type: "Premium",
-    package_facilities: [
-      {
-        facility_id: "1",
-        facility_name: "Aula Utama",
-        equipment_list: [
-          { name: "Sound System" },
-          { name: "Proyektor" },
-          { name: "AC" },
-          { name: "Kursi 200 buah" },
-        ],
-        parking_info: "Tersedia 50 slot parkir mobil dan 100 slot parkir motor",
-      },
-      {
-        facility_id: "2",
-        facility_name: "Ruang VIP",
-        equipment_list: [
-          { name: "Sound System Premium" },
-          { name: "LED TV 65 inch" },
-          { name: "AC Central" },
-          { name: "Kursi VIP 50 buah" },
-        ],
-        parking_info: "Tersedia 20 slot parkir mobil VIP",
-      },
-    ],
+    package_facilities: [],
   },
   {
     package_id: "3",
     package_name: "Paket Platinum",
     package_type: "Luxury",
-    package_facilities: [
-      {
-        facility_id: "1",
-        facility_name: "Aula Utama",
-        equipment_list: [
-          { name: "Sound System" },
-          { name: "Proyektor" },
-          { name: "AC" },
-          { name: "Kursi 200 buah" },
-        ],
-        parking_info: "Tersedia 50 slot parkir mobil dan 100 slot parkir motor",
-      },
-      {
-        facility_id: "2",
-        facility_name: "Ruang VIP",
-        equipment_list: [
-          { name: "Sound System Premium" },
-          { name: "LED TV 65 inch" },
-          { name: "AC Central" },
-          { name: "Kursi VIP 50 buah" },
-        ],
-        parking_info: "Tersedia 20 slot parkir mobil VIP",
-      },
-      {
-        facility_id: "5",
-        facility_name: "Ballroom",
-        equipment_list: [
-          { name: "Sound System Professional" },
-          { name: "Lighting System" },
-          { name: "AC Central" },
-          { name: "Stage" },
-          { name: "Kursi 300 buah" },
-        ],
-        parking_info: "Tersedia 80 slot parkir mobil dan 150 slot parkir motor",
-      },
-    ],
+    package_facilities: [],
   },
 ];
 
@@ -145,7 +75,9 @@ export const getDetailWeddingPackages = async (
   return res.data;
 };
 
-export const createWeddingPackages = async (req: TWeddingPackagesRequest): Promise<TDefaultResponse> => {
+export const createWeddingPackages = async (
+  req: TWeddingPackagesRequest,
+): Promise<TDefaultResponse> => {
   return Promise.resolve({
     code: 200,
     message: "Berhasil",

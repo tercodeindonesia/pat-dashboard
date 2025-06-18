@@ -1,4 +1,4 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { generatePath, useNavigate } from "react-router";
 
@@ -12,9 +12,12 @@ import { useFilter } from "@/app/_hooks/use-filter";
 import { TFacilities, TFacilitiesFilter } from "@/api/master-data/facilities/type";
 import useGetListFacilities from "./_hooks/use-get-list-facilities";
 import { paths } from "@/commons/constants/paths";
+import { Button } from "@mui/material";
+import { AddOutlined, DeleteOutlined } from "@mui/icons-material";
 
 const Component: FC = (): ReactElement => {
   const navigate = useNavigate();
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const { filters, setFilter } = useFilter<TFacilitiesFilter>();
   const query = useGetListFacilities({
     sort_by: "created_at",
@@ -24,15 +27,14 @@ const Component: FC = (): ReactElement => {
   });
 
   const columns: GridColDef<TFacilities>[] = [
-    { field: "facility_id", headerName: "ID Fasilitas", width: 120 },
-    { field: "facility_name", headerName: "Nama Fasilitas", width: 200 },
+    { field: "id", headerName: "ID Fasilitas", width: 120 },
+    { field: "name", headerName: "Nama Fasilitas", width: 200 },
     {
-      field: "equipment_list",
-      headerName: "List Perlengkapan",
+      field: "type",
+      headerName: "Type Fasilitas",
       width: 300,
-      renderCell: (params) => params.row.equipment_list.map((item) => item.name).toString(),
+      renderCell: (params) => params.row.name,
     },
-    { field: "parking_info", headerName: "Info Parkir", width: 250 },
     {
       field: "actions",
       headerName: "Aksi",
@@ -46,13 +48,11 @@ const Component: FC = (): ReactElement => {
               key: "edit",
               type: "edit",
               onClick: () =>
-                navigate(
-                  generatePath(paths.master_data.facilities.edit, { id: params.row.facility_id }),
-                ),
+                navigate(generatePath(paths.master_data.facilities.edit, { id: params.row.id })),
             },
             {
-              key: "detail",
-              type: "detail",
+              key: "delete",
+              type: "delete",
               onClick: () => {},
             },
           ]}
@@ -76,16 +76,31 @@ const Component: FC = (): ReactElement => {
       topPage={
         <Filter
           variants={["search"]}
-          labelAdd="Tambah Fasilitas"
-          onAdd={() => navigate(paths.master_data.facilities.create)}
           defaultValue={{
             search_value: filters.search_value,
           }}
+          actions={[
+            <Button
+              key="add"
+              variant="contained"
+              startIcon={<AddOutlined />}
+              onClick={() => navigate(paths.master_data.facilities.create)}
+            >
+              Tambah Fasilitas
+            </Button>,
+            ...(selectedIds.length
+              ? [
+                  <Button key="delete" variant="outlined" startIcon={<DeleteOutlined />}>
+                    Delete
+                  </Button>,
+                ]
+              : []),
+          ]}
         />
       }
     >
       <DataTable
-        getRowId={(row: TFacilities) => row.facility_id}
+        getRowId={(row: TFacilities) => row.id}
         loading={false}
         rows={query.data?.result.data}
         columns={columns}
@@ -96,6 +111,7 @@ const Component: FC = (): ReactElement => {
           page: 1,
         })}
         handleChange={setFilter}
+        onRowSelectionModelChange={(ids) => setSelectedIds(ids)}
       />
     </Page>
   );
