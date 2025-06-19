@@ -1,4 +1,4 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, useState } from "react";
 import { GridColDef } from "@mui/x-data-grid";
 import { generatePath, useNavigate } from "react-router";
 
@@ -12,6 +12,8 @@ import { useFilter } from "@/app/_hooks/use-filter";
 import { TWeddingPackages, TWeddingPackagesFilter } from "@/api/master-data/wedding-packages/type";
 import useGetListWeddingPackages from "./_hooks/use-get-list-wedding-packages";
 import { paths } from "@/commons/constants/paths";
+import { Button } from "@mui/material";
+import { AddOutlined, DeleteOutlined } from "@mui/icons-material";
 
 const Component: FC = (): ReactElement => {
   const navigate = useNavigate();
@@ -22,16 +24,17 @@ const Component: FC = (): ReactElement => {
     limit: 10,
     page: filters.page || 1,
   });
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const columns: GridColDef<TWeddingPackages>[] = [
-    { field: "package_id", headerName: "ID Paket", width: 120 },
-    { field: "package_name", headerName: "Nama Paket", width: 200 },
-    { field: "package_type", headerName: "Type Paket", width: 150 },
+    { field: "id", headerName: "ID Paket", width: 120 },
+    { field: "name", headerName: "Nama Paket", width: 200 },
+    { field: "type", headerName: "Type Paket", width: 150 },
     {
       field: "package_facilities",
       headerName: "Fasilitas Paket",
       width: 300,
-      renderCell: (params) => params.row.package_facilities.map((item) => item.name).join(", "),
+      renderCell: (params) => params.row.facilities.map((item) => item.value).join(", "),
     },
     {
       field: "actions",
@@ -48,13 +51,13 @@ const Component: FC = (): ReactElement => {
               onClick: () =>
                 navigate(
                   generatePath(paths.master_data.wedding_packages.edit, {
-                    id: params.row.package_id,
+                    id: params.row.id,
                   }),
                 ),
             },
             {
-              key: "detail",
-              type: "detail",
+              key: "delete",
+              type: "delete",
               onClick: () => {},
             },
           ]}
@@ -78,16 +81,31 @@ const Component: FC = (): ReactElement => {
       topPage={
         <Filter
           variants={["search"]}
-          labelAdd="Tambah Paket"
-          onAdd={() => navigate(paths.master_data.wedding_packages.create)}
           defaultValue={{
             search_value: filters.search_value,
           }}
+          actions={[
+            <Button
+              key="add"
+              variant="contained"
+              startIcon={<AddOutlined />}
+              onClick={() => navigate(paths.master_data.wedding_packages.create)}
+            >
+              Tambah Paket
+            </Button>,
+            ...(selectedIds.length
+              ? [
+                  <Button key="delete" variant="outlined" startIcon={<DeleteOutlined />}>
+                    Delete
+                  </Button>,
+                ]
+              : []),
+          ]}
         />
       }
     >
       <DataTable
-        getRowId={(row: TWeddingPackages) => row.package_id}
+        getRowId={(row: TWeddingPackages) => row.id}
         loading={false}
         rows={query.data?.result.data}
         columns={columns}
@@ -98,6 +116,9 @@ const Component: FC = (): ReactElement => {
           page: 1,
         })}
         handleChange={setFilter}
+        onRowSelectionModelChange={(ids) => {
+          setSelectedIds(ids);
+        }}
       />
     </Page>
   );

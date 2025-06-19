@@ -20,22 +20,43 @@ const endpoints = {
 
 const mock: TWeddingPackages[] = [
   {
-    package_id: "1",
-    package_name: "Paket Silver",
-    package_type: "Basic",
-    package_facilities: [],
+    id: "pkg-001",
+    name: "Paket Silver",
+    type: "Indoor",
+    facilities: [
+      { id: "f-01", value: "Taman Dalam" },
+      { id: "f-02", value: "Lorong Griya" },
+      { id: "f-03", value: "Pendopo Utama" },
+      { id: "f-04", value: "Toilet" },
+      { id: "f-05", value: "Kursi" },
+    ],
+    starting_price: "15000000",
   },
   {
-    package_id: "2",
-    package_name: "Paket Gold",
-    package_type: "Premium",
-    package_facilities: [],
+    id: "pkg-002",
+    name: "Paket Gold",
+    type: "Outdoor",
+    facilities: [
+      { id: "f-06", value: "Taman Luar" },
+      { id: "f-07", value: "Gazebo" },
+      { id: "f-08", value: "Area Parkir" },
+      { id: "f-09", value: "Area Cuci Tangan" },
+      { id: "f-10", value: "Meja" },
+    ],
+    starting_price: "30000000",
   },
   {
-    package_id: "3",
-    package_name: "Paket Platinum",
-    package_type: "Luxury",
-    package_facilities: [],
+    id: "pkg-003",
+    name: "Paket Platinum",
+    type: "Indoor & Outdoor",
+    facilities: [
+      { id: "f-11", value: "Griya Ayem & Tentrem" },
+      { id: "f-12", value: "Pantry Catering" },
+      { id: "f-13", value: "Selaras" },
+      { id: "f-14", value: "Muchola" },
+      { id: "f-15", value: "CCTV" },
+    ],
+    starting_price: "50000000",
   },
 ];
 
@@ -68,7 +89,7 @@ export const getDetailWeddingPackages = async (
     code: 200,
     message: "Berhasil",
     status: true,
-    result: mock.find((item) => item.package_id === params?.id) || null,
+    result: mock.find((item) => item.id === params?.id) || null,
   });
 
   const res = await api.get(generatePath(endpoints.detail, { params }));

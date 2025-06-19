@@ -29,9 +29,9 @@ const Component: FC = (): ReactElement => {
   const columns: GridColDef<TVendor>[] = [
     { field: "vendor_id", headerName: "ID Vendor", width: 100 },
     { field: "name", headerName: "Nama Vendor", width: 200 },
-    { 
-      field: "type", 
-      headerName: "Type Vendor", 
+    {
+      field: "type",
+      headerName: "Type Vendor",
       width: 150,
       renderCell: (params) => params.row.type.name,
     },
