@@ -34,9 +34,9 @@ export const middleware = async ({ request }: LoaderFunctionArgs) => {
     return null;
   }
 
-  if (!session) {
-    return redirect(paths.auth.login);
-  }
+  // if (!session) {
+  //   return redirect(paths.auth.login);
+  // }
 
   if (allowedPermissions.length === 0) {
     return redirect(paths.dashboard);
