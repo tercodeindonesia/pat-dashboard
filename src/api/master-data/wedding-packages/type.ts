@@ -1,21 +1,27 @@
 import { Nullable } from "@/commons/types/common";
 import { TFilterParams } from "@/commons/types/filter";
 import { TResponse, TResponsePaginate } from "@/commons/types/response";
-import { TFacilities } from "../facilities/type";
 
 export type TWeddingPackagesFilter = TFilterParams;
 
 export type TWeddingPackages = {
-  package_id: string;
-  package_name: string;
-  package_type: string;
-  package_facilities: TFacilities[];
+  id: string;
+  name: string;
+  type: string;
+  facilities: { id: string; value: string }[];
+  starting_price: string;
 };
 
 export type TWeddingPackagesRequest = {
-  package_name: string;
-  package_type: string;
-  package_facilities: string[];
+  name: string;
+  type: string;
+  staring_price: string;
+  facilities: string[];
+  thumbnail: string;
+  image: string;
+  portfolio: string;
+  video: string;
+  description: string;
 };
 
 export type TDetailWeddingPackagesResponse = TResponse<Nullable<TWeddingPackages>>;
