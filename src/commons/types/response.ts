@@ -9,11 +9,11 @@ export type TResponse<T> = {
 };
 
 export type TPaginationInfo = {
-  current_page: number;
+  currentPage: number;
   total: number;
-  total_page: number;
-  has_previous_page: boolean;
-  has_next_page: boolean;
+  totalPage: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 };
 
 export type TPagination<T = null> = {
