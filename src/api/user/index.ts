@@ -15,11 +15,11 @@ export const getUsers = (params: TGetUsersParams): Promise<TUserPaginateResponse
     status: true,
     result: {
       data: [],
-      current_page: 1,
+      currentPage: 1,
       total: 10,
-      total_page: 4,
-      has_previous_page: false,
-      has_next_page: true,
+      totalPage: 4,
+      hasPreviousPage: false,
+      hasNextPage: true,
     },
   });
 };

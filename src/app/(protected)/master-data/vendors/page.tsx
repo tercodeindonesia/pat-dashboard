@@ -116,9 +116,9 @@ const Component: FC = (): ReactElement => {
         columns={columns}
         checkboxSelection
         paginationInfo={createPaginationInfo({
-          per_page: query.data?.result.total_page || 1,
+          per_page: query.data?.result.totalPage || 1,
           total: query.data?.result.total || 0,
-          page: query.data?.result.current_page || 1,
+          page: query.data?.result.currentPage || 1,
         })}
         handleChange={setFilter}
         onRowSelectionModelChange={(ids) => {

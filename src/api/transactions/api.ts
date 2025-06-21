@@ -90,11 +90,11 @@ export const getListTransaction = async (
     status: true,
     result: {
       data: mock,
-      current_page: 1,
+      currentPage: 1,
       total: 10,
-      total_page: 4,
-      has_previous_page: false,
-      has_next_page: true,
+      totalPage: 4,
+      hasPreviousPage: false,
+      hasNextPage: true,
     },
   });
 
